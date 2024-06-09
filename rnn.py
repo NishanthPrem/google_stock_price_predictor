@@ -23,7 +23,7 @@ X_train, y_train = np.array(X_train), np.array(y_train)
 # Reshaping the data
 
 X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
-
+#%%
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Dropout
 
@@ -65,6 +65,9 @@ for i in range(60, 80):
 X_test = np.array(X_test)
 X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 predicted_price = regressor.predict(X_test)
+predicted_price = sc.inverse_transform(predicted_price)
 
-
-
+#%%
+plt.plot(real_price, color='red')
+plt.plot(predicted_price, color='blue')
+plt.show()
